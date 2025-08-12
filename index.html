@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Web Test Katalon</title>
+<style>
+    body { font-family: Arial; margin: 20px; }
+    h2 { color: #2c3e50; }
+    .box { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
+    input, select, button, textarea { padding: 5px; margin: 5px 0; width: 100%; }
+    ul { list-style: none; padding: 0; }
+    li { padding: 5px; border-bottom: 1px solid #ddd; }
+</style>
+</head>
+<body>
+
+<h1>Web Test Katalon - 4 Chức Năng</h1>
+
+<!-- 1. Đăng nhập -->
+<div class="box">
+    <h2>1. Đăng nhập</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <p id="loginResult"></p>
+</div>
+
+<!-- 2. Form liên hệ -->
+<div class="box">
+    <h2>2. Form liên hệ</h2>
+    <input type="text" id="name" placeholder="Họ tên">
+    <input type="email" id="email" placeholder="Email">
+    <textarea id="message" placeholder="Nội dung liên hệ"></textarea>
+    <button onclick="sendContact()">Gửi liên hệ</button>
+    <p id="contactResult"></p>
+</div>
+
+<!-- 3. Máy tính -->
+<div class="box">
+    <h2>3. Máy tính</h2>
+    <input type="number" id="num1" placeholder="Số 1">
+    <input type="number" id="num2" placeholder="Số 2">
+    <select id="operation">
+        <option value="+">Cộng (+)</option>
+        <option value="-">Trừ (-)</option>
+        <option value="*">Nhân (×)</option>
+        <option value="/">Chia (÷)</option>
+    </select>
+    <button onclick="calculate()">Tính</button>
+    <p id="calcResult"></p>
+</div>
+
+<!-- 4. Danh sách sản phẩm -->
+<div class="box">
+    <h2>4. Danh sách sản phẩm</h2>
+    <input type="text" id="search" placeholder="Tìm sản phẩm..." onkeyup="filterProducts()">
+    <ul id="productList">
+        <li>Điện thoại Samsung</li>
+        <li>Điện thoại iPhone</li>
+        <li>Laptop Dell</li>
+        <li>Laptop HP</li>
+        <li>Tai nghe Bluetooth</li>
+        <li>Chuột máy tính</li>
+        <li>Bàn phím cơ</li>
+    </ul>
+</div>
+
+<script>
+function login() {
+    const user = document.getElementById("username").value;
+    const pass = document.getElementById("password").value;
+    if (user === "admin" && pass === "123") {
+        document.getElementById("loginResult").innerHTML = "✅ Login thành công";
+    } else {
+        document.getElementById("loginResult").innerHTML = "❌ Sai tài khoản hoặc mật khẩu";
+    }
+}
+
+function sendContact() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const msg = document.getElementById("message").value;
+    if (name && email && msg) {
+        document.getElementById("contactResult").innerHTML =
+            `📩 Đã gửi: ${name} - ${email} - ${msg}`;
+    } else {
+        document.getElementById("contactResult").innerHTML = "⚠ Vui lòng nhập đủ thông tin";
+    }
+}
+
+function calculate() {
+    const num1 = parseFloat(document.getElementById("num1").value);
+    const num2 = parseFloat(document.getElementById("num2").value);
+    const op = document.getElementById("operation").value;
+    if (isNaN(num1) || isNaN(num2)) {
+        document.getElementById("calcResult").innerHTML = "⚠ Vui lòng nhập số hợp lệ";
+        return;
+    }
+    let result;
+    switch(op) {
+        case "+": result = num1 + num2; break;
+        case "-": result = num1 - num2; break;
+        case "*": result = num1 * num2; break;
+        case "/": 
+            result = num2 !== 0 ? (num1 / num2) : "Không
